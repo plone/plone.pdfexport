@@ -1,0 +1,17 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    i18n_domain="plone.pdfexport">
+
+ <!-- -*- extra stuff goes here -*- -->
+
+  <browser:page
+    name="aspdf"
+    for="Products.CMFCore.interfaces.IFolderish"
+    class=".pdf_export.PdfExport"
+    template="aspdf.pt"
+    permission="zope2.View"
+    />
+
+</configure>
