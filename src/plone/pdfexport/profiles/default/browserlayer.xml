@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layers>
+  <layer
+      name="plone.pdfexport"
+      interface="plone.pdfexport.interfaces.IPlonePdfexportLayer"
+      />
+</layers>
