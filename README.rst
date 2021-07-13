@@ -64,6 +64,18 @@ Install plone.pdfexport by adding it to your buildout::
 
 and then running ``bin/buildout``
 
+Usage
+-----
+
+After installing the add-on you can call the "aspdf" view on any Plone content.
+
+``http://localhost:8080/Plone/news/aspdf``
+
+for testing, you can add the GET parameter "html=1" to see the HTML version before it get rendered into a PDF.
+
+``http://localhost:8080/Plone/news/aspdf?html=1``
+
+
 Authors
 -------
 
