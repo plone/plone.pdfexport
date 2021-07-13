@@ -5,8 +5,8 @@
 .. image:: https://github.com/plone/plone.pdfexport/actions/workflows/plone-package.yml/badge.svg
     :target: https://github.com/plone/plone.pdfexport/actions/workflows/plone-package.yml
 
-.. image:: https://coveralls.io/repos/github/collective/plone.pdfexport/badge.svg?branch=main
-    :target: https://coveralls.io/github/collective/plone.pdfexport?branch=main
+.. image:: https://coveralls.io/repos/github/plone/plone.pdfexport/badge.svg?branch=main
+    :target: https://coveralls.io/github/plone/plone.pdfexport?branch=main
     :alt: Coveralls
 
 .. image:: https://img.shields.io/pypi/v/plone.pdfexport.svg
