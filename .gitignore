@@ -31,3 +31,4 @@ report.html
 reports/
 venv/
 # excludes
+/.coverage.py*

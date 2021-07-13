@@ -27,16 +27,11 @@ class ViewsIntegrationTest(unittest.TestCase):
             (self.portal["other-folder"], self.portal.REQUEST), name="aspdf"
         )
         self.assertTrue(view.__name__ == "aspdf")
-        # self.assertTrue(
-        #     'Sample View' in view(),
-        #     'Sample View is not found in aspdf'
-        # )
+        view = getMultiAdapter(
+            (self.portal["front-page"], self.portal.REQUEST), name="aspdf"
+        )
+        self.assertTrue(view.__name__ == "aspdf")
 
-    def test_aspdf_not_matching_interface(self):
-        with self.assertRaises(ComponentLookupError):
-            getMultiAdapter(
-                (self.portal["front-page"], self.portal.REQUEST), name="aspdf"
-            )
 
 
 class ViewsFunctionalTest(unittest.TestCase):
