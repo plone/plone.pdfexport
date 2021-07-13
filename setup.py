@@ -51,6 +51,8 @@ setup(
         'plone.api>=1.8.4',
         'plone.restapi < 8.0.0',
         'plone.app.dexterity',
+        'weasyprint',
+        'beautifulsoup4',
     ],
     extras_require={
         'test': [

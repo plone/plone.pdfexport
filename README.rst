@@ -28,33 +28,25 @@
 plone.pdfexport
 ===============
 
-Tell me what your product does
+Provides PDF export functionality for Plone content.
 
 Features
 --------
 
-- Can be bullet points
+- Exports Documents, Event, News items and other custom content.
+- Can be customized via CSS in the PDF Export control panel.
+- Long tables which will be rendered on more than one page, will have the thead repeated on every page.
+- One can use Plone body tag CSS classes to define CSS rules for specific Plone content.
 
-
-Examples
---------
-
-This add-on can be seen in action at the following sites:
-- Is there a page on the internet where everybody can see the features?
-
-
-Documentation
--------------
-
-Full documentation for end users can be found in the "docs" folder, and is also available online at http://docs.plone.org/foo/bar
-
+This add-on is based on the great `WeasyPrint library <https://weasyprint.org>`_.
 
 Translations
 ------------
 
 This product has been translated into
 
-- Klingon (thanks, K'Plai)
+- english
+- german
 
 
 Installation
@@ -72,20 +64,23 @@ Install plone.pdfexport by adding it to your buildout::
 
 and then running ``bin/buildout``
 
+Authors
+-------
+
+This add-on was build by `Derico <https://derico.de>`_ [MrTango].
+
 
 Contribute
 ----------
 
-- Issue Tracker: https://github.com/collective/plone.pdfexport/issues
-- Source Code: https://github.com/collective/plone.pdfexport
-- Documentation: https://docs.plone.org/foo/bar
+- Issue Tracker: https://github.com/plone/plone.pdfexport/issues
+- Source Code: https://github.com/plone/plone.pdfexport
 
 
 Support
 -------
 
 If you are having issues, please let us know.
-We have a mailing list located at: project@example.com
 
 
 License

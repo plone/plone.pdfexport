@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.linkconsentinfo">
+
+  <browser:page
+    name="pdfexport-controlpanel"
+    for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+    class=".pdf_export.PdfExportControlPanelView"
+    permission="cmf.ManagePortal"
+    />
+
+</configure>

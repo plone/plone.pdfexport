@@ -8,9 +8,9 @@
 
   <browser:page
     name="aspdf"
-    for="Products.CMFCore.interfaces.IFolderish"
+    for="*"
     class=".pdf_export.PdfExport"
-    template="aspdf.pt"
+    template="pdf_export.pt"
     permission="zope2.View"
     />
 

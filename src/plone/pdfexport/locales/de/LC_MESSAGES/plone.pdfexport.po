@@ -24,7 +24,7 @@ msgstr ""
 
 #: plone/pdfexport/controlpanels/pdf_export.py:20
 msgid "Print CSS"
-msgstr ""
+msgstr "CSS für PDF-Ausgabe"
 
 #: plone/pdfexport/configure.zcml:36
 msgid "Uninstalls the plone.pdfexport add-on."
@@ -32,7 +32,7 @@ msgstr ""
 
 #: plone/pdfexport/controlpanels/pdf_export.py:21
 msgid "https://weasyprint.readthedocs.io/en/stable/tutorial.html\" target=\"_blank\">WeasyPrint Docs</a>"
-msgstr ""
+msgstr "WeasyPrint Dokumentation (EN)"
 
 #: plone/pdfexport/configure.zcml:27
 msgid "plone.pdfexport"

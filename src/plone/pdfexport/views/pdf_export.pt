@@ -3,11 +3,13 @@
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       i18n:domain="plone.pdfexport"
-      metal:use-macro="context/main_template/macros/master">
+      >
+<head>
+  <style tal:content="view/get_styles"></style>
+</head>
 <body>
-  <metal:block fill-slot="content-core">
-      <h2 i18n:translate="">Sample View</h2>
-      <p tal:content="view/msg">this gets replaced</p>
-  </metal:block>
+
+  <div id="pdf-content"></div>
+
 </body>
 </html>
