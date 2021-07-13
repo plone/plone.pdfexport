@@ -33,7 +33,6 @@ class ViewsIntegrationTest(unittest.TestCase):
         self.assertTrue(view.__name__ == "aspdf")
 
 
-
 class ViewsFunctionalTest(unittest.TestCase):
 
     layer = PLONE_PDFEXPORT_FUNCTIONAL_TESTING
