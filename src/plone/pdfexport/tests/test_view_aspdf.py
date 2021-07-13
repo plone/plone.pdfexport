@@ -17,17 +17,16 @@ class ViewsIntegrationTest(unittest.TestCase):
     layer = PLONE_PDFEXPORT_INTEGRATION_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        api.content.create(self.portal, 'Folder', 'other-folder')
-        api.content.create(self.portal, 'Document', 'front-page')
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])
+        api.content.create(self.portal, "Folder", "other-folder")
+        api.content.create(self.portal, "Document", "front-page")
 
     def test_aspdf_is_registered(self):
         view = getMultiAdapter(
-            (self.portal['other-folder'], self.portal.REQUEST),
-            name='aspdf'
+            (self.portal["other-folder"], self.portal.REQUEST), name="aspdf"
         )
-        self.assertTrue(view.__name__ == 'aspdf')
+        self.assertTrue(view.__name__ == "aspdf")
         # self.assertTrue(
         #     'Sample View' in view(),
         #     'Sample View is not found in aspdf'
@@ -36,8 +35,7 @@ class ViewsIntegrationTest(unittest.TestCase):
     def test_aspdf_not_matching_interface(self):
         with self.assertRaises(ComponentLookupError):
             getMultiAdapter(
-                (self.portal['front-page'], self.portal.REQUEST),
-                name='aspdf'
+                (self.portal["front-page"], self.portal.REQUEST), name="aspdf"
             )
 
 
@@ -46,5 +44,5 @@ class ViewsFunctionalTest(unittest.TestCase):
     layer = PLONE_PDFEXPORT_FUNCTIONAL_TESTING
 
     def setUp(self):
-        self.portal = self.layer['portal']
-        setRoles(self.portal, TEST_USER_ID, ['Manager'])
+        self.portal = self.layer["portal"]
+        setRoles(self.portal, TEST_USER_ID, ["Manager"])

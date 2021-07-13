@@ -21,11 +21,12 @@ class PlonePdfexportLayer(PloneSandboxLayer):
         # The z3c.autoinclude feature is disabled in the Plone fixture base
         # layer.
         import plone.restapi
+
         self.loadZCML(package=plone.restapi)
         self.loadZCML(package=plone.pdfexport)
 
     def setUpPloneSite(self, portal):
-        applyProfile(portal, 'plone.pdfexport:default')
+        applyProfile(portal, "plone.pdfexport:default")
 
 
 PLONE_PDFEXPORT_FIXTURE = PlonePdfexportLayer()
@@ -33,13 +34,13 @@ PLONE_PDFEXPORT_FIXTURE = PlonePdfexportLayer()
 
 PLONE_PDFEXPORT_INTEGRATION_TESTING = IntegrationTesting(
     bases=(PLONE_PDFEXPORT_FIXTURE,),
-    name='PlonePdfexportLayer:IntegrationTesting',
+    name="PlonePdfexportLayer:IntegrationTesting",
 )
 
 
 PLONE_PDFEXPORT_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(PLONE_PDFEXPORT_FIXTURE,),
-    name='PlonePdfexportLayer:FunctionalTesting',
+    name="PlonePdfexportLayer:FunctionalTesting",
 )
 
 
@@ -49,5 +50,5 @@ PLONE_PDFEXPORT_ACCEPTANCE_TESTING = FunctionalTesting(
         REMOTE_LIBRARY_BUNDLE_FIXTURE,
         z2.ZSERVER_FIXTURE,
     ),
-    name='PlonePdfexportLayer:AcceptanceTesting',
+    name="PlonePdfexportLayer:AcceptanceTesting",
 )
