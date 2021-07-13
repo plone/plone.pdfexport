@@ -76,6 +76,34 @@ for testing, you can add the GET parameter "html=1" to see the HTML version befo
 ``http://localhost:8080/Plone/news/aspdf?html=1``
 
 
+To archive landscape mode, one can adjust the CSS in the control panel:
+
+.. code-block:: CSS
+
+    @page {
+        margin: 2.75cm 1.4cm 1.4cm 1.4cm;
+        size: landscape;
+        @top-center {
+            font-size:12px;
+            color:#666666;
+            content: "Beautiful Plone content, deserves a beautiful PDF export!";
+        }
+        @bottom-left {
+            font-size:12px;
+            color:#666666;
+            content: "provided by derico.de";
+        }
+        @bottom-right {
+            font-size:12px;
+            color:#666666;
+            content: "Page " counter(page);
+        }
+
+    }
+
+
+
+
 Authors
 -------
 
