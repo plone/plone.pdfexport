@@ -102,8 +102,6 @@ To archive landscape mode, one can adjust the CSS in the control panel:
     }
 
 
-
-
 Authors
 -------
 

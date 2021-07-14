@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
+from types import BuiltinMethodType
 
 import weasyprint
 from bs4 import BeautifulSoup
+from plone.app.layout.globals.interfaces import IViewView
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter, getUtility
+from zope.interface import alsoProvides
 
 from plone.pdfexport import _
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
-# from plone.dexterity.browser.view import DefaultView
 # from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
 
@@ -19,10 +21,18 @@ class PdfExport(BrowserView):
     def __call__(self):
         default_page = getattr(self.context.aq_explicit, "default_page", None)
         ctx = default_page and self.context.get(default_page) or self.context
+
+        # without this the leadimage viewlet will not be rendered!
+        self.request.set("URL", ctx.absolute_url())
+        self.request.set("ACTUAL_URL", ctx.absolute_url())
+
         view_name = getattr(ctx.aq_explicit, "layout", ctx.getDefaultLayout())
-        self.context_view = getMultiAdapter((ctx, ctx.REQUEST), name=view_name)
+        self.context_view = getMultiAdapter((ctx, self.request), name=view_name)
+        alsoProvides(self.context_view, IViewView)
+
         # disable batching for PDF export
-        self.context_view._b_size = 10000
+        self.context_view._b_size = 100000
+
         if self.request.form.get("html"):
             return self.render_html()
         return self.render_pdf()
