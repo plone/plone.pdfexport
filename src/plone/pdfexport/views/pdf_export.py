@@ -71,6 +71,9 @@ class PdfExport(BrowserView):
         body_classes = content_soup.select_one("body")["class"]
         content = content_soup.select_one("#content")
         # copy body css classes to content tag, for later usage in print css
+        content_classes = content.get("class", "")
+        if content_classes:
+            body_classes += " " + content_classes
         content["class"] = body_classes
         html_frame = self.index()
         frame_soup = BeautifulSoup(html_frame, "html.parser")
