@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a4 (unreleased)
+1.0a4 (2021-07-14)
 ------------------
 
 - Don't use  optimize_images=True in weasyprint for now, it only works in Py3 versions
