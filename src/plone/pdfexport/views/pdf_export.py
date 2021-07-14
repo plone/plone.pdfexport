@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+# from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+import re
 from datetime import datetime
 from types import BuiltinMethodType
 
@@ -14,7 +16,20 @@ from zope.interface import alsoProvides
 from plone.pdfexport import _
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
-# from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+image_base_url = re.compile("(.*@@images).*")
+
+
+def plone_url_fetcher(url):
+    registry = getUtility(IRegistry)
+    pdf_export_settings = registry.forInterface(
+        IPdfExportControlPanel, prefix="pdfexport"
+    )
+    print_image_scale = pdf_export_settings.print_image_scale or "large"
+    url_match = image_base_url.match(url)
+    groups = url_match.groups()
+    if groups:
+        url = "{0}/image/{1}".format(groups[0], print_image_scale)
+    return weasyprint.default_url_fetcher(url)
 
 
 class PdfExport(BrowserView):
@@ -58,7 +73,9 @@ class PdfExport(BrowserView):
         html_str = self.context_view.index()
         filename = self._filename()
         html_str = self._clean_html(html_str)
-        pdf = weasyprint.HTML(string=html_str, base_url=base_url).write_pdf()
+        pdf = weasyprint.HTML(
+            string=html_str, base_url=base_url, url_fetcher=plone_url_fetcher
+        ).write_pdf(presentational_hints=True, optimize_images=True)
         self.request.response.setHeader("Content-Type", "application/pdf")
         self.request.response.setHeader(
             "Content-Disposition", "inline;filename=%s" % filename
@@ -70,6 +87,7 @@ class PdfExport(BrowserView):
         content_soup = BeautifulSoup(raw_html, "html.parser")
         body_classes = content_soup.select_one("body")["class"]
         content = content_soup.select_one("#content")
+
         # copy body css classes to content tag, for later usage in print css
         content_classes = content.get("class", "")
         if content_classes:

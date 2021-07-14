@@ -50,8 +50,20 @@ class IPdfExportControlPanel(Interface):
    size: landscape;
 }*/
 
+/*
+.newsImageContainer{
+  text-align: center;
+}*/
 
+.newsImageContainer img{
+  max-width: 80%;
+  max-height: 80%;
+}
 
+img{
+  max-width: 100%;
+  max-height: 100%;
+}
 body {
     height: 100%;
     display: block;
@@ -102,8 +114,25 @@ table.listing td:nth-child(1){
     color: #696969;
     margin-bottom: 10px;
 }
+.newsImageContainer {
+    float: right;
+    margin: 0 0 6px 6px;
+}
         """
         ),
+    )
+
+    print_image_scale = schema.Choice(
+        title=_(
+            u'Print Image Scale',
+        ),
+        description=_(
+            u'Image scale to use for PDF Export.',
+        ),
+        vocabulary=u'plone.app.vocabularies.ImagesScales',
+        default=u'large',
+        # defaultFactory=get_default_print_scale,
+        required=True,
     )
 
 

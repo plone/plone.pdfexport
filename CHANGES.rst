@@ -5,7 +5,8 @@ Changelog
 1.0a3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add print_image_scale to control panel and use custom image scale for PDF export
+  [MrTango]
 
 
 1.0a2 (2021-07-14)
