@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a3 (unreleased)
+1.0a3 (2021-07-14)
 ------------------
 
 - Add print_image_scale to control panel and use custom image scale for PDF export
