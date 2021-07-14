@@ -75,7 +75,7 @@ class PdfExport(BrowserView):
         html_str = self._clean_html(html_str)
         pdf = weasyprint.HTML(
             string=html_str, base_url=base_url, url_fetcher=plone_url_fetcher
-        ).write_pdf(presentational_hints=True, optimize_images=True)
+        ).write_pdf(presentational_hints=True)
         self.request.response.setHeader("Content-Type", "application/pdf")
         self.request.response.setHeader(
             "Content-Disposition", "inline;filename=%s" % filename

@@ -5,8 +5,8 @@ Changelog
 1.0a4 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Don't use  optimize_images=True in weasyprint for now, it only works in Py3 versions
+  [MrTango]
 
 1.0a3 (2021-07-14)
 ------------------
