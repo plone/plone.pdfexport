@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-07-13 11:32+0000\n"
+"POT-Creation-Date: 2021-07-15 15:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -14,23 +14,35 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: DOMAIN\n"
 
-#: plone/pdfexport/controlpanels/pdf_export.py:23
-msgid "Helvetica Neue\OpenSans-Regular\",\"HelveticaNeue\"
+#: plone/pdfexport/profiles/default/actions.xml
+msgid "Download this Page as PDF"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:127
+msgid "Image scale to use for PDF Export."
 msgstr ""
 
 #: plone/pdfexport/configure.zcml:27
 msgid "Installs the plone.pdfexport add-on."
 msgstr ""
 
-#: plone/pdfexport/controlpanels/pdf_export.py:20
+#: plone/pdfexport/profiles/default/actions.xml
+msgid "PDF"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:19
 msgid "Print CSS"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:124
+msgid "Print Image Scale"
 msgstr ""
 
 #: plone/pdfexport/configure.zcml:36
 msgid "Uninstalls the plone.pdfexport add-on."
 msgstr ""
 
-#: plone/pdfexport/controlpanels/pdf_export.py:21
+#: plone/pdfexport/controlpanels/pdf_export.py:22
 msgid "https://weasyprint.readthedocs.io/en/stable/tutorial.html\" target=\"_blank\">WeasyPrint Docs</a>"
 msgstr ""
 

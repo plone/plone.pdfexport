@@ -23,8 +23,7 @@ class IPdfExportControlPanel(Interface):
             u'CSS to format the PDF export.\n <a href="https://weasyprint.readthedocs.io/en/stable/tutorial.html" target="_blank">WeasyPrint Docs</a>',
         ),
         required=False,
-        default=_(
-            u"""/* portrait */
+        default=u"""/* portrait */
 @page {
    margin: 1.4cm 1.4cm 2.75cm 1.4cm;
    @top-center {
@@ -118,8 +117,7 @@ table.listing td:nth-child(1){
     float: right;
     margin: 0 0 6px 6px;
 }
-        """
-        ),
+        """,
     )
 
     print_image_scale = schema.Choice(

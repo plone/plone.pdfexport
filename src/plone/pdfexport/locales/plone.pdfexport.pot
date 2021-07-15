@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2021-07-13 11:32+0000\n"
+"POT-Creation-Date: 2021-07-15 15:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,64 +17,33 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: plone.pdfexport\n"
 
-#: plone/pdfexport/controlpanels/pdf_export.py:23
-msgid "/* portrait */
-@page {
-   margin: 1.4cm 1.4cm 2.75cm 1.4cm;
-}
-
-/* landscape*/
-/*@page {
-   margin: 2.75cm 1.4cm 1.4cm 1.4cm;
-   size: landscape;
-}*/
-
-body {
-    height: 100%;
-    display: block;
-    font-size:12px;
-    color:#444444;
-    font-family: \"Helvetica Neue\",Helvetica,Arial,sans-serif;
-    font-family: \"OpenSans-Regular\",\"HelveticaNeue\",Helvetica,Arial,sans-serif;
-}
-table.listing{
-    border-collapse: collapse;
-    border: 1px solid #edecec;
-    padding: 0.4em;
-}
-table.listing th{
-    border: 1px solid #edecec;
-    background-color: #edecec;
-    padding: 0.8em;
-
-}
-table.listing td{
-    border: 1px solid #edecec;
-    padding: 0.4em;
-    text-align: center;
-}
-table.listing td:nth-child(1){
-    text-align: left;
-}
-
-.documentActions,
-  #viewlet-below-content-title{
-  display: none;
-}
-        "
-msgstr ""
-
-#: plone/pdfexport/controlpanels/pdf_export.py:21
+#: plone/pdfexport/controlpanels/pdf_export.py:22
 msgid "CSS to format the PDF export.
  <a href=\"https://weasyprint.readthedocs.io/en/stable/tutorial.html\" target=\"_blank\">WeasyPrint Docs</a>"
+msgstr ""
+
+#: plone/pdfexport/profiles/default/actions.xml
+msgid "Download this Page as PDF"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:127
+msgid "Image scale to use for PDF Export."
 msgstr ""
 
 #: plone/pdfexport/configure.zcml:27
 msgid "Installs the plone.pdfexport add-on."
 msgstr ""
 
-#: plone/pdfexport/controlpanels/pdf_export.py:20
+#: plone/pdfexport/profiles/default/actions.xml
+msgid "PDF"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:19
 msgid "Print CSS"
+msgstr ""
+
+#: plone/pdfexport/controlpanels/pdf_export.py:124
+msgid "Print Image Scale"
 msgstr ""
 
 #: plone/pdfexport/configure.zcml:36
