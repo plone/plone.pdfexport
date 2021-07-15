@@ -38,6 +38,10 @@ Features
 - Long tables which will be rendered on more than one page, will have the thead repeated on every page.
 - One can use Plone body tag CSS classes to define CSS rules for specific Plone content.
 
+.. figure:: https://github.com/plone/plone.pdfexport/raw/main/docs/plone-pdfexport.gif
+
+
+
 This add-on is based on the great `WeasyPrint library <https://weasyprint.org>`_.
 
 Translations
