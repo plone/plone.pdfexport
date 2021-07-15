@@ -5,7 +5,8 @@ Changelog
 1.0a5 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Resolve images internally in a custom WeasyPrint url_fetcher, this removes the need to resolves url's for WeasyPrint, which was problematic with permissions or https cert issues
+  [MrTango]
 
 
 1.0a4 (2021-07-14)

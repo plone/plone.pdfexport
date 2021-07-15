@@ -12,6 +12,7 @@ from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter, getUtility
 from zope.interface import alsoProvides
+from zope.site.hooks import getSite
 
 from plone.pdfexport import _
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
@@ -27,9 +28,17 @@ def plone_url_fetcher(url):
     print_image_scale = pdf_export_settings.print_image_scale or "large"
     url_match = image_base_url.match(url)
     groups = url_match.groups()
+    base_url = u""
     if groups:
         url = "{0}/image/{1}".format(groups[0], print_image_scale)
-    return weasyprint.default_url_fetcher(url)
+        base_url = groups[0]
+    portal = getSite()
+    pstate = getMultiAdapter((portal, portal.REQUEST), name="plone_portal_state")
+    purl = pstate.portal_url()
+    scaling_view = portal.unrestrictedTraverse(base_url.replace(purl, "").lstrip("/"))
+    scaled_image = scaling_view.scale("image", scale=print_image_scale)
+    image_file = scaled_image.data.open()
+    return dict(file_obj=image_file)
 
 
 class PdfExport(BrowserView):
@@ -101,7 +110,7 @@ class PdfExport(BrowserView):
     def _filename(self):
         filename = self.context.id
         now = datetime.now()
-        filename += "{0}{1}{2}_{3}{4}.pdf".format(
+        filename += "_{0}{1}{2}_{3}{4}.pdf".format(
             now.year, now.month, now.day, now.hour, now.minute
         )
         return filename

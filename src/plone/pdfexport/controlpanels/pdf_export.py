@@ -124,13 +124,13 @@ table.listing td:nth-child(1){
 
     print_image_scale = schema.Choice(
         title=_(
-            u'Print Image Scale',
+            u"Print Image Scale",
         ),
         description=_(
-            u'Image scale to use for PDF Export.',
+            u"Image scale to use for PDF Export.",
         ),
-        vocabulary=u'plone.app.vocabularies.ImagesScales',
-        default=u'large',
+        vocabulary=u"plone.app.vocabularies.ImagesScales",
+        default=u"large",
         # defaultFactory=get_default_print_scale,
         required=True,
     )
