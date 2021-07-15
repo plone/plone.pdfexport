@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.0a5 (unreleased)
+1.0b1 (2021-07-15)
 ------------------
 
 - Resolve images internally in a custom WeasyPrint url_fetcher, this removes the need to resolves url's for WeasyPrint, which was problematic with permissions or https cert issues
