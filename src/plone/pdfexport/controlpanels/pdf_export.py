@@ -23,13 +23,16 @@ class IPdfExportControlPanel(Interface):
             u'CSS to format the PDF export.\n <a href="https://weasyprint.readthedocs.io/en/stable/tutorial.html" target="_blank">WeasyPrint Docs</a>',
         ),
         required=False,
-        default=u"""/* portrait */
+        default=u"""
+link[rel=canonical] { string-set: pageurl attr(href); }
+
+/* portrait */
 @page {
    margin: 1.4cm 1.4cm 2.75cm 1.4cm;
    @top-center {
      font-size:12px;
      color:#666666;
-     content: "Beautiful Plone content, deserves a beautiful PDF export!";
+     content: "string(pageurl)";
    }
    @bottom-left {
      font-size:12px;

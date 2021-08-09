@@ -43,6 +43,9 @@ def plone_url_fetcher(url):
 
 class PdfExport(BrowserView):
     def __call__(self):
+        cstate = getMultiAdapter((portal, portal.REQUEST), name="plone_context_state")
+        self.canonical_url = cstate.canonical_object_url()
+
         default_page = getattr(self.context.aq_explicit, "default_page", None)
         ctx = default_page and self.context.get(default_page) or self.context
 

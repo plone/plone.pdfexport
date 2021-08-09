@@ -6,6 +6,7 @@
       >
 <head>
   <style tal:content="view/get_styles"></style>
+  <link rel="canonical" href="${view/canonical_url}" />
 </head>
 <body>
 
