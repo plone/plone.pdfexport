@@ -2,10 +2,14 @@ Changelog
 =========
 
 
-1.0b2 (unreleased)
+1.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Improve German translations
+  [MrTango]
+
+- Improve error handling and add more tests
+  [MrTango]
 
 
 1.0b1 (2021-07-15)

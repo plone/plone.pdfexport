@@ -3,7 +3,6 @@
 # from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 import re
 from datetime import datetime
-from types import BuiltinMethodType
 
 import weasyprint
 from bs4 import BeautifulSoup
@@ -14,7 +13,6 @@ from zope.component import getMultiAdapter, getUtility
 from zope.interface import alsoProvides
 from zope.site.hooks import getSite
 
-from plone.pdfexport import _
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
 image_base_url = re.compile("(.*@@images).*")
@@ -43,8 +41,6 @@ def plone_url_fetcher(url):
 
 class PdfExport(BrowserView):
     def __call__(self):
-        cstate = getMultiAdapter((portal, portal.REQUEST), name="plone_context_state")
-        self.canonical_url = cstate.canonical_object_url()
 
         default_page = getattr(self.context.aq_explicit, "default_page", None)
         ctx = default_page and self.context.get(default_page) or self.context
@@ -65,6 +61,13 @@ class PdfExport(BrowserView):
         return self.render_pdf()
 
     @property
+    def canonical_url(self):
+        cstate = getMultiAdapter(
+            (self.context, self.request), name="plone_context_state"
+        )
+        return cstate.canonical_object_url()
+
+    @property
     def get_styles(self):
         registry = getUtility(IRegistry)
         pdf_export_settings = registry.forInterface(
@@ -82,7 +85,7 @@ class PdfExport(BrowserView):
             (self.context, self.request), name="plone_context_state"
         )
         base_url = cstate.current_base_url()
-        html_str = self.context_view.index()
+        html_str = self.context_view()
         filename = self._filename()
         html_str = self._clean_html(html_str)
         pdf = weasyprint.HTML(
@@ -97,14 +100,16 @@ class PdfExport(BrowserView):
 
     def _clean_html(self, raw_html):
         content_soup = BeautifulSoup(raw_html, "html.parser")
-        body_classes = content_soup.select_one("body")["class"]
         content = content_soup.select_one("#content")
+        body = content_soup.select_one("body")
+        body_classes = body.get("class")
 
         # copy body css classes to content tag, for later usage in print css
-        content_classes = content.get("class", "")
-        if content_classes:
-            body_classes += " " + content_classes
-        content["class"] = body_classes
+        if body_classes:
+            content_classes = content.get("class", [])
+            body_classes.extend(content_classes)
+            content["class"] = body_classes
+
         html_frame = self.index()
         frame_soup = BeautifulSoup(html_frame, "html.parser")
         frame_soup.select_one("#pdf-content").replace_with(content)

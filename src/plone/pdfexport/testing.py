@@ -9,8 +9,6 @@ from plone.app.testing import (
 )
 from plone.testing import z2
 
-import plone.pdfexport
-
 
 class PlonePdfexportLayer(PloneSandboxLayer):
 

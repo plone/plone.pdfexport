@@ -3,7 +3,6 @@ from plone.app.registry.browser.controlpanel import (
     ControlPanelFormWrapper,
     RegistryEditForm,
 )
-from plone.autoform import directives
 from plone.z3cform import layout
 from zope.interface import Interface
 
@@ -32,7 +31,8 @@ link[rel=canonical] { string-set: pageurl attr(href); }
    @top-center {
      font-size:12px;
      color:#666666;
-     content: "string(pageurl)";
+     /*content: "string(pageurl)";*/
+     content: "Beautiful Plone content, deserves a beautiful PDF export!";
    }
    @bottom-left {
      font-size:12px;

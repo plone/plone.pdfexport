@@ -56,6 +56,7 @@ This product has been translated into
 Installation
 ------------
 
+
 Install plone.pdfexport by adding it to your buildout::
 
     [buildout]
@@ -67,6 +68,15 @@ Install plone.pdfexport by adding it to your buildout::
 
 
 and then running ``bin/buildout``
+
+Note: for Python 2 (Plone 5.1) you have to pin some packages:
+
+    weasyprint = 0.42.3
+    cairocffi = 0.9.0
+    tinycss2 = 0.6.1
+    soupsieve = 1.9.6
+    cssselect2 = 0.2.2
+
 
 Usage
 -----
