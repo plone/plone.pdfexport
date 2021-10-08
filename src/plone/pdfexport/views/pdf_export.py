@@ -24,18 +24,24 @@ def plone_url_fetcher(url):
         IPdfExportControlPanel, prefix="pdfexport"
     )
     print_image_scale = pdf_export_settings.print_image_scale or "large"
-    url_match = image_base_url.match(url)
-    groups = url_match.groups()
-    base_url = u""
-    if groups:
-        url = "{0}/image/{1}".format(groups[0], print_image_scale)
-        base_url = groups[0]
     portal = getSite()
     pstate = getMultiAdapter((portal, portal.REQUEST), name="plone_portal_state")
     purl = pstate.portal_url()
-    scaling_view = portal.unrestrictedTraverse(base_url.replace(purl, "").lstrip("/"))
-    scaled_image = scaling_view.scale("image", scale=print_image_scale)
-    image_file = scaled_image.data.open()
+    url_match = image_base_url.match(url)
+    if url_match:
+        # get the image configured image scale:
+        groups = url_match.groups()
+        base_url = u""
+        if groups:
+            url = "{0}/image/{1}".format(groups[0], print_image_scale)
+            base_url = groups[0]
+        scaling_view = portal.unrestrictedTraverse(base_url.replace(purl, "").lstrip("/"))
+        scaled_image = scaling_view.scale("image", scale=print_image_scale)
+        image_file = scaled_image.data.open()
+    else:
+        # get the original image:
+        image_obj = portal.unrestrictedTraverse(url.replace(purl, "").lstrip("/"))
+        image_file = image_obj.image.open()
     return dict(file_obj=image_file)
 
 
