@@ -35,7 +35,9 @@ def plone_url_fetcher(url):
         if groups:
             url = "{0}/image/{1}".format(groups[0], print_image_scale)
             base_url = groups[0]
-        scaling_view = portal.unrestrictedTraverse(base_url.replace(purl, "").lstrip("/"))
+        scaling_view = portal.unrestrictedTraverse(
+            base_url.replace(purl, "").lstrip("/")
+        )
         scaled_image = scaling_view.scale("image", scale=print_image_scale)
         image_file = scaled_image.data.open()
     else:
@@ -82,7 +84,7 @@ class PdfExport(BrowserView):
         return pdf_export_settings.print_css
 
     def render_html(self):
-        html_str = self.context_view.index()
+        html_str = self.context_view()
         html_str = self._clean_html(html_str)
         return html_str
 
@@ -96,7 +98,7 @@ class PdfExport(BrowserView):
         html_str = self._clean_html(html_str)
         pdf = weasyprint.HTML(
             string=html_str, base_url=base_url, url_fetcher=plone_url_fetcher
-        ).write_pdf(presentational_hints=True)
+        ).write_pdf(presentational_hints=True, optimize_size=("images", "fonts"))
         self.request.response.setHeader("Content-Type", "application/pdf")
         self.request.response.setHeader(
             "Content-Disposition", "inline;filename=%s" % filename

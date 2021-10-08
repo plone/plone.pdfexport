@@ -2,10 +2,17 @@ Changelog
 =========
 
 
-1.1 (unreleased)
+2.0 (unreleased)
 ----------------
 
-- Nothing changed yet.
+nothing yet
+
+
+1.1 (2021-10-08)
+----------------
+
+Improved image handling, now support also original images (without @@images/scales).
+  [MrTango]
 
 
 1.0 (2021-10-06)
