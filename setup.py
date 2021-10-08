@@ -14,7 +14,7 @@ long_description = "\n\n".join(
 
 setup(
     name="plone.pdfexport",
-    version="1.1",
+    version="1.2.dev0",
     description="PDF export of Plone content based on the weasyprint library.",
     long_description=long_description,
     # Get more from https://pypi.org/classifiers/
