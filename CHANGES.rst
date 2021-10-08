@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.1 (unreleased)
+1.1 (2021-10-08)
 ----------------
 
 - Improved image handling, now support also original images (without @@images/scales).
