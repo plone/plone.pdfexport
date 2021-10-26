@@ -13,25 +13,46 @@ from plone.pdfexport import _
 class IPdfExportControlPanel(Interface):
     """PdfExportControlPanel schema"""
 
-    # directives.widget("print_css", klass="print-css")
-    print_css = schema.Text(
+    default_mode = schema.Choice(
         title=_(
-            u"Print CSS",
+            u'Default mode',
         ),
         description=_(
-            u'CSS to format the PDF export.\n <a href="https://weasyprint.readthedocs.io/en/stable/tutorial.html" target="_blank">WeasyPrint Docs</a>',
+            u'Choose if Portrait or Landscape mode should be the default.\nYou can override it later with ?mode=landscape url parameter.',
         ),
+        vocabulary="plone.pdfexport.AvailablePageModes",
+        default=u"portrait",
+        # defaultFactory=get_default_default_mode,
         required=False,
-        default=u"""
-link[rel=canonical] { string-set: pageurl attr(href); }
+        readonly=False,
+    )
 
-/* portrait */
+    print_image_scale = schema.Choice(
+        title=_(
+            u"Print Image Scale",
+        ),
+        description=_(
+            u"Image scale to use for PDF Export.",
+        ),
+        vocabulary=u"plone.app.vocabularies.ImagesScales",
+        default=u"large",
+        # defaultFactory=get_default_print_scale,
+        required=True,
+    )
+
+    portrait_css = schema.SourceText(
+        title=_(
+            u'Portrait page definitions',
+        ),
+        description=_(
+            u'Define page setting for the portrait mode',
+        ),
+        default=u"""/* portrait */
 @page {
    margin: 1.4cm 1.4cm 2.75cm 1.4cm;
    @top-center {
      font-size:12px;
      color:#666666;
-     /*content: "string(pageurl)";*/
      content: "Beautiful Plone content, deserves a beautiful PDF export!";
    }
    @bottom-left {
@@ -45,14 +66,53 @@ link[rel=canonical] { string-set: pageurl attr(href); }
      content: "Page " counter(page);
    }
 }
+        """,
+        required=False,
+        readonly=False,
+    )
 
-/* landscape*/
-/*@page {
-   margin: 2.75cm 1.4cm 1.4cm 1.4cm;
+    landscape_css = schema.SourceText(
+        title=_(
+            u'Landscape page definitions',
+        ),
+        description=_(
+            u'Define page setting for the landscape mode',
+        ),
+        default=u"""/* landscape*/
+@page {
+   margin: 1.5cm 1.5cm 1.5cm 1.5cm;
    size: landscape;
-}*/
+   @top-center {
+     font-size:12px;
+     color:#666666;
+     content: "Beautiful Plone content, deserves a beautiful PDF export!";
+   }
+   @bottom-left {
+     font-size:12px;
+     color:#666666;
+     content: "provided by derico.de";
+   }
+   @bottom-right {
+     font-size:12px;
+     color:#666666;
+     content: "Page " counter(page);
+   }
+}
+        """,
+        required=False,
+        readonly=False,
+    )
 
-/*
+    # directives.widget("print_css", klass="print-css")
+    print_css = schema.Text(
+        title=_(
+            u"Print CSS",
+        ),
+        description=_(
+            u'CSS to format the PDF export.\n <a href="https://weasyprint.readthedocs.io/en/stable/tutorial.html" target="_blank">WeasyPrint Docs</a>',
+        ),
+        required=False,
+        default=u"""/*
 .newsImageContainer{
   text-align: center;
 }*/
@@ -121,19 +181,6 @@ table.listing td:nth-child(1){
     margin: 0 0 6px 6px;
 }
         """,
-    )
-
-    print_image_scale = schema.Choice(
-        title=_(
-            u"Print Image Scale",
-        ),
-        description=_(
-            u"Image scale to use for PDF Export.",
-        ),
-        vocabulary=u"plone.app.vocabularies.ImagesScales",
-        default=u"large",
-        # defaultFactory=get_default_print_scale,
-        required=True,
     )
 
 
