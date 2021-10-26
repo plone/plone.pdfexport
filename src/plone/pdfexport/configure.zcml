@@ -42,6 +42,8 @@
 
   <!-- -*- extra stuff goes here -*- -->
 
+  <include package=".upgrades" />
+
     <include package=".vocabularies" />
 
 
