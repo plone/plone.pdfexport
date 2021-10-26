@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.2 (unreleased)
+1.2 (2021-10-26)
 ----------------
 
 - Provide both page mode's (landscape and portrait) with a default setting and switch thru a request mode parameter
