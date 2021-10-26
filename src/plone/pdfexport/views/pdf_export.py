@@ -6,6 +6,7 @@ from datetime import datetime
 
 import weasyprint
 from bs4 import BeautifulSoup
+from plone import api
 from plone.app.layout.globals.interfaces import IViewView
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
@@ -49,7 +50,6 @@ def plone_url_fetcher(url):
 
 class PdfExport(BrowserView):
     def __call__(self):
-
         default_page = getattr(self.context.aq_explicit, "default_page", None)
         ctx = default_page and self.context.get(default_page) or self.context
 
@@ -77,11 +77,13 @@ class PdfExport(BrowserView):
 
     @property
     def get_styles(self):
-        registry = getUtility(IRegistry)
-        pdf_export_settings = registry.forInterface(
-            IPdfExportControlPanel, prefix="pdfexport"
-        )
-        return pdf_export_settings.print_css
+        mode = api.portal.get_registry_record('pdfexport.default_mode')
+        mode = self.request.get('mode') or mode
+        page_css = api.portal.get_registry_record("pdfexport.{0}_css".format(mode))
+        print_css = api.portal.get_registry_record('pdfexport.print_css')
+        css = "{0}{1}".format(page_css, print_css)
+        print(css)
+        return css
 
     def render_html(self):
         html_str = self.context_view()

@@ -90,7 +90,7 @@ for testing, you can add the GET parameter "html=1" to see the HTML version befo
 ``http://localhost:8080/Plone/news/aspdf?html=1``
 
 
-To archive landscape mode, one can adjust the CSS in the control panel:
+We provide portrait and landscape mode with separate page setting for each mode:
 
 .. code-block:: CSS
 
@@ -114,6 +114,14 @@ To archive landscape mode, one can adjust the CSS in the control panel:
         }
 
     }
+
+You can set which mode is the default. To use a different mode, you can add a request parameter:
+
+.. code-block::
+
+    http://localhost:8080/Plone/front-page/aspdf?mode=landscape
+    http://localhost:8080/Plone/front-page/aspdf?mode=portait
+
 
 
 Authors
