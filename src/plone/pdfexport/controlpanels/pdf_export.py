@@ -21,7 +21,7 @@ class IPdfExportControlPanel(Interface):
             u'Choose if Portrait or Landscape mode should be the default.\nYou can override it later with ?mode=landscape url parameter.',
         ),
         vocabulary="plone.pdfexport.AvailablePageModes",
-        default=u"",
+        default=u"portrait",
         # defaultFactory=get_default_default_mode,
         required=False,
         readonly=False,
@@ -48,13 +48,11 @@ class IPdfExportControlPanel(Interface):
             u'Define page setting for the portrait mode',
         ),
         default=u"""/* portrait */
-link[rel=canonical] { string-set: pageurl attr(href); }
 @page {
    margin: 1.4cm 1.4cm 2.75cm 1.4cm;
    @top-center {
      font-size:12px;
      color:#666666;
-     /*content: "string(pageurl)";*/
      content: "Beautiful Plone content, deserves a beautiful PDF export!";
    }
    @bottom-left {
@@ -68,7 +66,7 @@ link[rel=canonical] { string-set: pageurl attr(href); }
      content: "Page " counter(page);
    }
 }
-""",
+        """,
         required=False,
         readonly=False,
     )
@@ -81,13 +79,12 @@ link[rel=canonical] { string-set: pageurl attr(href); }
             u'Define page setting for the landscape mode',
         ),
         default=u"""/* landscape*/
-/*@page {
+@page {
    margin: 1.5cm 1.5cm 1.5cm 1.5cm;
    size: landscape;
    @top-center {
      font-size:12px;
      color:#666666;
-     /*content: "string(pageurl)";*/
      content: "Beautiful Plone content, deserves a beautiful PDF export!";
    }
    @bottom-left {
@@ -100,9 +97,8 @@ link[rel=canonical] { string-set: pageurl attr(href); }
      color:#666666;
      content: "Page " counter(page);
    }
-}*/
-
-""",
+}
+        """,
         required=False,
         readonly=False,
     )

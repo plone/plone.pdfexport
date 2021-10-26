@@ -6,6 +6,8 @@ Changelog
 ----------------
 
 nothing yet
+- Provide both page mode's (landscape and portrait) with a default setting and switch thru a request mode parameter
+  [MrTango]
 
 
 1.1 (2021-10-08)
