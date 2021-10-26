@@ -15,10 +15,10 @@ class IPdfExportControlPanel(Interface):
 
     default_mode = schema.Choice(
         title=_(
-            u'Default mode',
+            u"Default mode",
         ),
         description=_(
-            u'Choose if Portrait or Landscape mode should be the default.\nYou can override it later with ?mode=landscape url parameter.',
+            u"Choose if Portrait or Landscape mode should be the default.\nYou can override it later with ?mode=landscape url parameter.",
         ),
         vocabulary="plone.pdfexport.AvailablePageModes",
         default=u"portrait",
@@ -42,10 +42,10 @@ class IPdfExportControlPanel(Interface):
 
     portrait_css = schema.SourceText(
         title=_(
-            u'Portrait page definitions',
+            u"Portrait page definitions",
         ),
         description=_(
-            u'Define page setting for the portrait mode',
+            u"Define page setting for the portrait mode",
         ),
         default=u"""/* portrait */
 @page {
@@ -73,10 +73,10 @@ class IPdfExportControlPanel(Interface):
 
     landscape_css = schema.SourceText(
         title=_(
-            u'Landscape page definitions',
+            u"Landscape page definitions",
         ),
         description=_(
-            u'Define page setting for the landscape mode',
+            u"Define page setting for the landscape mode",
         ),
         default=u"""/* landscape*/
 @page {

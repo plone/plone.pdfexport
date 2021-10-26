@@ -6,7 +6,6 @@ from datetime import datetime
 
 import weasyprint
 from bs4 import BeautifulSoup
-from plone import api
 from plone.app.layout.globals.interfaces import IViewView
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
@@ -14,6 +13,7 @@ from zope.component import getMultiAdapter, getUtility
 from zope.interface import alsoProvides
 from zope.site.hooks import getSite
 
+from plone import api
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
 image_base_url = re.compile("(.*@@images).*")
@@ -77,10 +77,10 @@ class PdfExport(BrowserView):
 
     @property
     def get_styles(self):
-        mode = api.portal.get_registry_record('pdfexport.default_mode')
-        mode = self.request.get('mode') or mode
+        mode = api.portal.get_registry_record("pdfexport.default_mode")
+        mode = self.request.get("mode") or mode
         page_css = api.portal.get_registry_record("pdfexport.{0}_css".format(mode))
-        print_css = api.portal.get_registry_record('pdfexport.print_css')
+        print_css = api.portal.get_registry_record("pdfexport.print_css")
         css = "{0}{1}".format(page_css, print_css)
         print(css)
         return css
