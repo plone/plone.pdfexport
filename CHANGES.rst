@@ -5,7 +5,11 @@ Changelog
 2.1 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- fix python_requires definition
+  [MrTango]
+
+- require Py >=3.7 and remove restapi down pinning
+  [MrTango]
 
 
 2.0 (2021-10-26)
