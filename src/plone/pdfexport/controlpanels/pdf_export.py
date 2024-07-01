@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
+from plone import schema
 from plone.app.registry.browser.controlpanel import (
     ControlPanelFormWrapper,
     RegistryEditForm,
 )
 from plone.z3cform import layout
-from zope.interface import Interface
-
-from plone import schema
 from plone.pdfexport import _
+from plone.formwidget.namedfile.widget import NamedImageFieldWidget
+from zope.interface import Interface
 
 
 class IPdfExportControlPanel(Interface):
@@ -38,6 +38,17 @@ class IPdfExportControlPanel(Interface):
         default=u"large",
         # defaultFactory=get_default_print_scale,
         required=True,
+    )
+
+    banner = schema.Bytes(
+        title=_(
+            u'Banner / Logo image',
+        ),
+        description=_(
+            u'An image to show above the first page.',
+        ),
+        required=False,
+        readonly=False,
     )
 
     portrait_css = schema.SourceText(
@@ -188,6 +199,10 @@ class PdfExportControlPanelForm(RegistryEditForm):
     schema = IPdfExportControlPanel
     schema_prefix = "pdfexport"
     label = u"PDF Export Settings"
+
+    def updateFields(self):
+        super(PdfExportControlPanelForm, self).updateFields()
+        self.fields['banner'].widgetFactory = NamedImageFieldWidget
 
 
 PdfExportControlPanelView = layout.wrap_form(

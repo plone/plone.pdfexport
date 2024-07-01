@@ -8,6 +8,7 @@ import weasyprint
 from bs4 import BeautifulSoup
 from plone import api
 from plone.app.layout.globals.interfaces import IViewView
+from plone.formwidget.namedfile.converter import b64decode_file
 from plone.registry.interfaces import IRegistry
 from Products.Five.browser import BrowserView
 from zope.component import getMultiAdapter, getUtility
@@ -17,6 +18,25 @@ from zope.site.hooks import getSite
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
 image_base_url = re.compile("(.*@@images).*")
+
+
+def getBannerImage(site=None):
+    if site is None:
+        site = getSite()
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(
+        IPdfExportControlPanel,
+        prefix="pdfexport",
+        check=False,
+    )
+    site_url = site.absolute_url()
+
+    if getattr(settings, 'banner', False):
+        filename, data = b64decode_file(settings.banner)
+        return '{}/@@pdf-banner/{}'.format(
+            site_url, filename)
+    else:
+        return '%s/logo.png' % site_url
 
 
 def plone_url_fetcher(url):
@@ -84,6 +104,10 @@ class PdfExport(BrowserView):
         css = "{0}{1}".format(page_css, print_css)
         print(css)
         return css
+
+    @property
+    def img_src(self):
+        return getBannerImage()
 
     def render_html(self):
         html_str = self.context_view()
