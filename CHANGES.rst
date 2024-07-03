@@ -5,7 +5,8 @@ Changelog
 1.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add Bnner image field, reander banner in page headers
+  [MrTango]
 
 
 1.2 (2021-10-26)
