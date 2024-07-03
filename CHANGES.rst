@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.3 (unreleased)
+1.3 (2024-07-03)
 ----------------
 
 - Add Bnner image field, reander banner in page headers
