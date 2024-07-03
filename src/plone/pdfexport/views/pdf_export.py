@@ -17,7 +17,8 @@ from zope.site.hooks import getSite
 
 from plone.pdfexport.controlpanels.pdf_export import IPdfExportControlPanel
 
-image_base_url = re.compile("(.*@@images).*")
+image_base_url = re.compile(r"(.*@@images).*")
+pdf_banner_url = re.compile(r"(.*@@pdf-banner)/(.*)/?.*")
 
 
 def getBannerImage(site=None):
@@ -30,7 +31,6 @@ def getBannerImage(site=None):
         check=False,
     )
     site_url = site.absolute_url()
-
     if getattr(settings, 'banner', False):
         filename, data = b64decode_file(settings.banner)
         return '{}/@@pdf-banner/{}'.format(
@@ -48,10 +48,11 @@ def plone_url_fetcher(url):
     portal = getSite()
     pstate = getMultiAdapter((portal, portal.REQUEST), name="plone_portal_state")
     purl = pstate.portal_url()
-    url_match = image_base_url.match(url)
-    if url_match:
+    images_url_match = image_base_url.match(url)
+    pdf_url_match = pdf_banner_url.match(url)
+    if images_url_match:
         # get the image configured image scale:
-        groups = url_match.groups()
+        groups = images_url_match.groups()
         base_url = u""
         if groups:
             url = "{0}/image/{1}".format(groups[0], print_image_scale)
@@ -61,10 +62,24 @@ def plone_url_fetcher(url):
         )
         scaled_image = scaling_view.scale("image", scale=print_image_scale)
         image_file = scaled_image.data.open()
+    elif pdf_url_match:
+        # get pdf-banner, something special, comes from registry
+        groups = pdf_url_match.groups()
+        if groups:
+            pdf_view = api.content.get_view(
+                "pdf-banner",
+                context=portal,
+                request=portal.REQUEST,
+            )
+            # pdf_banner_view = pdf_view.publishTraverse(portal.REQUEST, groups[1])
+            image_file = pdf_view()
+            # return directly but as string
+            return dict(string=image_file)
     else:
         # get the original image:
-        image_obj = portal.unrestrictedTraverse(url.replace(purl, "").lstrip("/"))
-        image_file = image_obj.image.open()
+        image_obj = portal.unrestrictedTraverse(url.replace(purl, "").lstrip("/"), None)
+        if image_obj:
+            image_file = image_obj.image.open()
     return dict(file_obj=image_file)
 
 
@@ -85,7 +100,7 @@ class PdfExport(BrowserView):
         self.context_view._b_size = 100000
 
         if self.request.form.get("html"):
-            return self.render_html()
+            return self.render_preview()
         return self.render_pdf()
 
     @property
@@ -102,12 +117,26 @@ class PdfExport(BrowserView):
         page_css = api.portal.get_registry_record("pdfexport.{0}_css".format(mode))
         print_css = api.portal.get_registry_record('pdfexport.print_css')
         css = "{0}{1}".format(page_css, print_css)
-        print(css)
         return css
 
     @property
     def img_src(self):
         return getBannerImage()
+
+    def render_preview(self):
+        html_str = self.render_html()
+        soup = BeautifulSoup(html_str, "html.parser")
+        style_tag = soup.new_tag("style")
+        style_tag.string = """
+body {
+    margin: 2.5cm 1.4cm 2.75cm 1.4cm;
+    position: relative;
+}
+header.pdf-header {top: 0;}
+"""
+        head = soup.find("head")
+        head.append(style_tag)
+        return str(soup)
 
     def render_html(self):
         html_str = self.context_view()
@@ -119,9 +148,8 @@ class PdfExport(BrowserView):
             (self.context, self.request), name="plone_context_state"
         )
         base_url = cstate.current_base_url()
-        html_str = self.context_view()
+        html_str = self.render_html()
         filename = self._filename()
-        html_str = self._clean_html(html_str)
         pdf = weasyprint.HTML(
             string=html_str, base_url=base_url, url_fetcher=plone_url_fetcher
         ).write_pdf(presentational_hints=True)
