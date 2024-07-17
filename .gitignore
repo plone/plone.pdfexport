@@ -32,3 +32,4 @@ reports/
 venv/
 # excludes
 /.coverage.py*
+/.python-version
