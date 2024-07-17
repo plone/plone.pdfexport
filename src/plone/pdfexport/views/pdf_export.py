@@ -96,7 +96,7 @@ class PdfExport(BrowserView):
         self.context_view = getMultiAdapter((ctx, self.request), name=view_name)
         alsoProvides(self.context_view, IViewView)
 
-        self.portal_type = self.context.portal_type
+        self.portal_type = self.context.portal_type.lower()
 
         # disable batching for PDF export
         self.context_view._b_size = 100000
