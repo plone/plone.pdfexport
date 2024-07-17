@@ -7,6 +7,14 @@
  <!-- -*- extra stuff goes here -*- -->
 
   <browser:page
+    name="resolve-reg-image"
+    for="Products.CMFCore.interfaces.IFolderish"
+    class=".resolve_reg_image.ResolveRegImage"
+    template="resolve_reg_image.pt"
+    permission="zope2.View"
+    />
+
+  <browser:page
     name="aspdf"
     for="*"
     class=".pdf_export.PdfExport"
