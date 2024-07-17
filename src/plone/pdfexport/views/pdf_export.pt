@@ -8,7 +8,7 @@
   <style tal:content="view/get_styles"></style>
   <link rel="canonical" href="${view/canonical_url}" />
 </head>
-<body>
+<body class="template-pdf-export">
 
   <header class="pdf-header">
       <img src="${view/img_src}">
