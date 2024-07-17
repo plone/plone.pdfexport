@@ -7,11 +7,10 @@
  <!-- -*- extra stuff goes here -*- -->
 
   <browser:page
-    name="resolve-reg-image"
-    for="Products.CMFCore.interfaces.IFolderish"
+    name="pdf-banner"
+    for="*"
     class=".resolve_reg_image.ResolveRegImage"
-    template="resolve_reg_image.pt"
-    permission="zope2.View"
+    permission="zope.Public"
     />
 
   <browser:page

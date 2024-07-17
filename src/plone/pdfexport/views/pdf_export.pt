@@ -11,13 +11,7 @@
 <body>
 
   <header class="pdf-header">
-    <a id="pdf-banner"
-       title="Home"
-       tal:attributes="href view/navigation_root_url;">
-      <img src="logo.png" alt=""
-          tal:attributes="alt view/logo_title;
-                         title view/logo_title;
-                         src view/img_src" /></a>
+      <img src="${view/img_src}">
   </header>
 
   <div id="pdf-content"></div>
