@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-1.4 (unreleased)
+1.4 (2024-07-21)
 ----------------
 
 - Fix python_requires to allow Python 3 versions as well.
