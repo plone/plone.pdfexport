@@ -5,7 +5,8 @@ Changelog
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add Banner image field, render banner in page headers
+  [MrTango]
 
 
 2.1 (2022-11-04)
