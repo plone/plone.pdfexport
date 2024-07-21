@@ -2,7 +2,7 @@ Changelog
 =========
 
 
-2.2 (unreleased)
+2.2 (2024-07-21)
 ----------------
 
 - Add Banner image field, render banner in page headers
