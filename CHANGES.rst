@@ -5,7 +5,8 @@ Changelog
 1.4 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Fix python_requires to allow Python 3 versions as well.
+  [MrTango]
 
 
 1.3 (2024-07-03)
